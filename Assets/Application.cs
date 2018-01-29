@@ -15,6 +15,8 @@ public class Application : MonoBehaviour {
 		ViewRoot = GameObject.Find ("View").transform;
 	}
 	
+
+
 	// Update is called once per frame
 	void Update () {
 		
