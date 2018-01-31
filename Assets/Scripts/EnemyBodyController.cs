@@ -11,6 +11,7 @@ public class EnemyBodyController : MonoBehaviour
     private Transform gun2;
     public float shootTime = 2;
     private bool shoot;
+    private Animator anim;
 
 	void Start ()
     {
@@ -18,11 +19,13 @@ public class EnemyBodyController : MonoBehaviour
         shoot = true;
         gun1 = transform.GetChild(0);
         gun2 = transform.GetChild(1);
+        anim = GetComponent<Animator>();
     }
 	
 
 	void Update ()
     {
+        if (anim.GetBool("isShooting")) anim.SetBool("isShooting", false);
         transform.LookAt(target);
         transform.Rotate(-90,-90,0);
         RaycastHit hit;
@@ -30,6 +33,7 @@ public class EnemyBodyController : MonoBehaviour
         if (shoot && hit.collider.gameObject.tag == "Player")
         {
             ShootLasers();
+            anim.SetBool("isShooting",true);
             shoot = false;
             Invoke("SetShootToTrue", shootTime);
         }
