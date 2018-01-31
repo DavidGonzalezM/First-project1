@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33916276904009136}
   - component: {fileID: 136908771000842524}
   - component: {fileID: 23789005435949834}
-  - component: {fileID: 122348196946236940}
   - component: {fileID: 114429427628099588}
   m_Layer: 0
   m_Name: LaserShot
@@ -58,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6d888986205f6e34b9c734faa0d40ed0, type: 2}
+  - {fileID: 2100000, guid: c5fc4c62d5346c2499f1defb1b25362a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,17 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserVelocity: 30
   lifetime: 2
---- !u!122 &122348196946236940
-Halo:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1048376827700576}
-  m_Enabled: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278190335
-  m_Size: 0.5
 --- !u!136 &136908771000842524
 CapsuleCollider:
   m_ObjectHideFlags: 1
