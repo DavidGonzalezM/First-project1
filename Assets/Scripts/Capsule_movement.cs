@@ -9,6 +9,7 @@ public class Capsule_movement : MonoBehaviour
     public float gravity = 20.0F;
     public float sprint = 8.0F;
     public float rotationSpeed = 100.0F;
+    public bool a = false;
     private int doble_salto = 0;
     private Vector3 moveDirection = Vector3.zero;
     private Rigidbody _rigidbody;
@@ -52,6 +53,16 @@ public class Capsule_movement : MonoBehaviour
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.tag == "Wall_walker")
+        {
+            a = true;
+            transform.Rotate(0, 0, 60);
+        }
     }
 
 
