@@ -25,7 +25,9 @@ public class EnemyBodyController : MonoBehaviour
     {
         transform.LookAt(target);
         transform.Rotate(-90,-90,0);
-        if (shoot)
+        RaycastHit hit;
+        Physics.Raycast(transform.position, target.position - transform.position, out hit);
+        if (shoot && hit.collider.gameObject.tag == "Player")
         {
             ShootLasers();
             shoot = false;
