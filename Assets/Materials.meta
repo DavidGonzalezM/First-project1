@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: bc8fb635a4358c54ba4013386fee220b
 folderAsset: yes
 timeCreated: 1517315784
+=======
+guid: 0cd43eb61212a1e4fbfcdeeaf1378870
+folderAsset: yes
+timeCreated: 1517395114
+>>>>>>> oriolbranch
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
