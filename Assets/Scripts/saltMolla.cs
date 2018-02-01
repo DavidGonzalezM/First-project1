@@ -6,7 +6,7 @@ public class saltMolla : MonoBehaviour {
 	private Rigidbody _rb;
 	// Use this for initialization
 	void Start () {
-		
+		_rb = GetComponent<Rigidbody> ();
 	}
 	
 	// Update is called once per frame
@@ -19,6 +19,6 @@ public class saltMolla : MonoBehaviour {
 	/// <param name="col">Col.</param>
 	void OnCollisionEnter (Collision col) {
 		if (col.collider.tag == "molla")
-			_rb.AddForce (0, 200, 0); 
+			_rb.AddForce (0, 30, 0); 
 	}
 }

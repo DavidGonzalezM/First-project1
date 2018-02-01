@@ -6,6 +6,10 @@ public class playerTest : MonoBehaviour
 {
     public float speed;
     public float jumpForce;
+	public float rotationspeed;
+
+	private float _rotationX;
+	private Quaternion _originalRotation;
 
     private Vector3 _calculatev;
     private Rigidbody _rb;
@@ -13,6 +17,7 @@ public class playerTest : MonoBehaviour
 
 	void Start ()
     {
+		_originalRotation = transform.localRotation;
         _rb = GetComponent<Rigidbody>();
         _sideWalking = false;
 	}
@@ -20,18 +25,20 @@ public class playerTest : MonoBehaviour
 
 	void Update ()
     {
+		ManageCamera ();
         ManageMovement();
         ManageJump();
     }
     void ManageMovement()
     {
+		
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            _calculatev.x = speed;
+			_calculatev.x = speed;
         }
         else if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            _calculatev.x = -speed;
+			_calculatev.x = -speed;
         }
         else
         {
@@ -40,11 +47,11 @@ public class playerTest : MonoBehaviour
 
         if (Input.GetAxisRaw("Vertical") > 0)
         {
-            _calculatev.z = speed;
+			_calculatev.z = speed;
         }
         else if (Input.GetAxisRaw("Vertical") < 0)
         {
-            _calculatev.z = -speed;
+			_calculatev.z = -speed;
         }
         else
         {
@@ -79,4 +86,16 @@ public class playerTest : MonoBehaviour
             _sideWalking = false;
         }
     }
+	void ManageCamera() {
+		
+
+		_rotationX += Input.GetAxis("Mouse X") * rotationspeed;
+
+
+		var xQuaternion = Quaternion.AngleAxis(_rotationX, Vector3.up);
+
+		transform.localRotation = _originalRotation * xQuaternion;
+
+		}
+
 }
