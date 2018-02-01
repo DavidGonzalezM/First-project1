@@ -8,30 +8,32 @@ public class GameController : MonoBehaviour
 
     public Text currentTime;
     public Text betterTime;
-    public Vector3 initialPos;
     public GameObject player;
-    private float time;
-    private float better;
+
+    private Vector3 _initialPos;
+    private float _time;
+    private float _better;
 
 	void Start ()
     {
-        time = 0;
-        better = 0;
+        _time = 0;
+        _better = 0;
         currentTime.text = "";
         betterTime.text = "";
+        _initialPos = player.transform.position;
     }
 	
 	void Update ()
     {
-        time += Time.deltaTime;
-        currentTime.text = "Time: " + Mathf.RoundToInt(time).ToString();
-        betterTime.text = "Better Time: " + Mathf.RoundToInt(better).ToString();
+        _time += Time.deltaTime;
+        currentTime.text = "Time: " + Mathf.RoundToInt(_time).ToString();
+        betterTime.text = "Better Time: " + Mathf.RoundToInt(_better).ToString();
     }
 
     public void EndGame()
     {
-        player.transform.position = initialPos;
-        if (time < better || better == 0) better = time;
-        time = 0;
+        player.transform.position = _initialPos;
+        if (_time < _better || _better == 0) _better = _time;
+        _time = 0;
     }
 }

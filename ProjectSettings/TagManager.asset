@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - End
+  - molla
+  - ParedV
   layers:
   - Default
   - TransparentFX
