@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundController : MonoBehaviour {
 
 	List<Sound> sounds;
-	List<AudioSource> sources;
+	//List<AudioSource> sources;
 
 	public float pitchVar;
 	//public float playOnStart = false;
@@ -14,11 +14,18 @@ public class SoundController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		sounds = new List<Sound> ();
+
 		foreach (GameObject asource in audioSources) {
-			AudioSource source = asource.GetComponent<AudioSource> ();
-			//sources.Add (source);
-			Sound s = new Sound (source, pitchVar);
-			s.setVolume (AudioManager.instance.getVolume ());
+			Sound s = new Sound();
+
+			if (asource != null) {
+				AudioSource source = asource.GetComponent<AudioSource> ();
+				//sources.Add (source);
+				s = new Sound (source, pitchVar);
+				s.setVolume (AudioManager.instance.getVolume ());
+			}
+
 			sounds.Add(s);
 		}
 

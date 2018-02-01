@@ -28,6 +28,11 @@ public class Sound {
 	private float sourcePitch;
 	private AudioSource source;
 
+	public Sound() {
+		clip = null;
+		source = null;
+	}
+
 	public Sound(AudioSource s) {
 		source = s;
 		clip = s.clip;
@@ -48,7 +53,7 @@ public class Sound {
 	}
 
 	public void setVolume(float v) {
-		source.volume = v * volume;
+		if(source != null) source.volume = v * volume;
 	}
 
 	public void setPitchVar(float pv) {
@@ -62,11 +67,14 @@ public class Sound {
 	}
 
 	public void Play() {
-		randomPitch ();
-		source.Play ();
+		if (source != null) {
+			randomPitch ();
+			source.Play ();
+		}
 	}
 
 	public void loop(bool isLoop) {
-		source.loop = isLoop;
+		if(source != null)
+			source.loop = isLoop;
 	}
 }
