@@ -274,7 +274,6 @@ GameObject:
   - component: {fileID: 46257558}
   - component: {fileID: 46257557}
   - component: {fileID: 46257556}
-  - component: {fileID: 46257555}
   m_Layer: 0
   m_Name: ascensor (2)
   m_TagString: Untagged
@@ -282,17 +281,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &46257555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 46257554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26928074cabe4ac48ab40ee3b5bcd499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &46257556
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3520,7 +3508,6 @@ GameObject:
   - component: {fileID: 1017608658}
   - component: {fileID: 1017608657}
   - component: {fileID: 1017608656}
-  - component: {fileID: 1017608655}
   m_Layer: 0
   m_Name: ascensor (3)
   m_TagString: Untagged
@@ -3528,17 +3515,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1017608655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1017608654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26928074cabe4ac48ab40ee3b5bcd499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &1017608656
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4068,7 +4044,6 @@ GameObject:
   - component: {fileID: 1207608651}
   - component: {fileID: 1207608650}
   - component: {fileID: 1207608649}
-  - component: {fileID: 1207608648}
   m_Layer: 0
   m_Name: ascensor (1)
   m_TagString: Untagged
@@ -4076,17 +4051,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1207608648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1207608647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26928074cabe4ac48ab40ee3b5bcd499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &1207608649
 MeshRenderer:
   m_ObjectHideFlags: 0
