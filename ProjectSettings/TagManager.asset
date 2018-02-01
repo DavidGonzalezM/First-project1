@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - player
+<<<<<<< HEAD
   - molla
+=======
+  - End
+>>>>>>> 8c1a7370c6f1bfcf3e4c6562fcc570399672d83a
   layers:
   - Default
   - TransparentFX
