@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class saltMolla : MonoBehaviour {
+    public float force;
 	private Rigidbody _rb;
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,6 @@ public class saltMolla : MonoBehaviour {
 	/// <param name="col">Col.</param>
 	void OnCollisionEnter (Collision col) {
 		if (col.collider.tag == "molla")
-			_rb.AddForce (0, 30, 0); 
+			_rb.AddForce (0, force, 0); 
 	}
 }
