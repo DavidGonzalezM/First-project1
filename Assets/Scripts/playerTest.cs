@@ -15,11 +15,14 @@ public class playerTest : MonoBehaviour
     private Rigidbody _rb;
     private bool _sideWalking;
 
+    private bool canJump;
+
 	void Start ()
     {
 		_originalRotation = transform.localRotation;
         _rb = GetComponent<Rigidbody>();
         _sideWalking = false;
+        canJump = true;
 	}
 	
 
@@ -31,30 +34,27 @@ public class playerTest : MonoBehaviour
     }
     void ManageMovement()
     {
-		
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
-			_calculatev.x = speed;
+            _calculatev = transform.right * speed;
         }
         else if (Input.GetAxisRaw("Horizontal") < 0)
         {
-			_calculatev.x = -speed;
-        }
-        else
-        {
-            _calculatev.x = 0;
+            _calculatev = -transform.right * speed;
         }
 
         if (Input.GetAxisRaw("Vertical") > 0)
         {
-			_calculatev.z = speed;
+            _calculatev = transform.forward * speed;
         }
         else if (Input.GetAxisRaw("Vertical") < 0)
         {
-			_calculatev.z = -speed;
+            _calculatev = -transform.forward * speed;
         }
-        else
+        
+        if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
+            _calculatev.x = 0;
             _calculatev.z = 0;
         }
 
@@ -66,9 +66,14 @@ public class playerTest : MonoBehaviour
 
     void ManageJump()
     {
+        
         if (Input.GetButtonDown("Jump"))
         {
-            _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (canJump)
+            {
+                _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                canJump = false;
+            }
         }
     }
 
@@ -77,6 +82,10 @@ public class playerTest : MonoBehaviour
         if (collision.gameObject.tag == "ParedV")
         {
             _sideWalking = true;
+        }
+        if (collision.contacts[0].normal == Vector3.up)
+        {
+            canJump = true;
         }
     }
     private void OnCollisionExit(Collision collision)

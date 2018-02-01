@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
         currentTime.text = "";
         betterTime.text = "";
         _initialPos = player.transform.position;
+        Cursor.visible = false;
     }
 	
 	void Update ()
