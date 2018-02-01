@@ -7,6 +7,7 @@ public class PlayerAudioController : MonoBehaviour
 
 	private float stepCount = 0f;
 	private bool wasMoving;
+	private bool alive;
 
 	private enum PlayerSounds
 	{
@@ -27,6 +28,7 @@ public class PlayerAudioController : MonoBehaviour
 		sc = GetComponent<SoundController> ();
 
 		wasMoving = player.isMoving ();
+		alive = true;
 	}
 
 	// Update is called once per frame
@@ -36,18 +38,26 @@ public class PlayerAudioController : MonoBehaviour
 	}
 
 	void ManageAudio() {
-		bool moving = player.isMoving ();
-		if(moving && !wasMoving) stepCount = stepSilence;
+		if (player.state != PlayerMasterController.PlayerStates.DEAD) {
+			bool moving = player.isMoving ();
+			if (moving && !wasMoving)
+				stepCount = stepSilence;
 
-		if (player.state == PlayerMasterController.PlayerStates.ON_SURFACE && moving) {
-			if (stepCount >= stepSilence) {
-				sc.Play ((int)PlayerSounds.WALK_STEP);
-				stepCount = 0f;
+			if (player.state == PlayerMasterController.PlayerStates.ON_SURFACE && moving) {
+				if (stepCount >= stepSilence) {
+					sc.Play ((int)PlayerSounds.WALK_STEP);
+					stepCount = 0f;
+				}
+				stepCount += Time.deltaTime;
 			}
-			stepCount += Time.deltaTime;
-		}
 
-		wasMoving = moving;
+			wasMoving = moving;
+		} else {
+			if (alive) {
+				sc.Play ((int)PlayerSounds.DEATH);
+				alive = false;
+			}
+		}
 	}
 
 	private void OnCollisionEnter(Collision collision)
