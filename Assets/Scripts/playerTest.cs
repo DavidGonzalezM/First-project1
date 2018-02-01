@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class playerTest : MonoBehaviour
 {
-
+    private Vector3 _calculatev;
     public float speed;
     public float jumpForce;
     private Rigidbody rb;
@@ -24,20 +24,31 @@ public class playerTest : MonoBehaviour
     {
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            transform.Translate(transform.right * speed * Time.deltaTime);
+            _calculatev.x = speed;
         }
-        if (Input.GetAxisRaw("Horizontal") < 0)
+        else if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            transform.Translate(-transform.right * speed * Time.deltaTime);
+            _calculatev.x = -speed;
         }
+        else
+        {
+            _calculatev.x = 0;
+        }
+
         if (Input.GetAxisRaw("Vertical") > 0)
         {
-            transform.Translate(transform.forward * speed * Time.deltaTime);
+            _calculatev.z = speed;
         }
-        if (Input.GetAxisRaw("Vertical") < 0)
+        else if (Input.GetAxisRaw("Vertical") < 0)
         {
-            transform.Translate(-transform.forward * speed * Time.deltaTime);
+            _calculatev.z = -speed;
         }
+        else
+        {
+            _calculatev.z = 0;
+        }
+        _calculatev.y = rb.velocity.y;
+        rb.velocity = _calculatev;
     }
 
     void ManageJump()
