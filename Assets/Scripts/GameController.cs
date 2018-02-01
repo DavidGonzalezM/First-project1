@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
     public void EndGame()
     {
         player.transform.position = initialPos;
-        if (time > better) better = time;
+        if (time < better || better == 0) better = time;
         time = 0;
     }
 }
