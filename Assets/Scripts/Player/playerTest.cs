@@ -16,6 +16,7 @@ public class playerTest : MonoBehaviour
     private bool _sideWalking;
 
     private bool canJump;
+    private GameController _gc;
 
 	void Start ()
     {
@@ -23,6 +24,7 @@ public class playerTest : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _sideWalking = false;
         canJump = true;
+        _gc = GameObject.Find("GameController").GetComponent<GameController>();
 	}
 	
 
@@ -34,22 +36,26 @@ public class playerTest : MonoBehaviour
     }
     void ManageMovement()
     {
+        float vel;
+        if (Input.GetKey(KeyCode.LeftShift)) vel = speed + 5;
+        else vel = speed;
+
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            _calculatev = transform.right * speed;
+            _calculatev = transform.right * vel;
         }
         else if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            _calculatev = -transform.right * speed;
+            _calculatev = -transform.right * vel;
         }
 
         if (Input.GetAxisRaw("Vertical") > 0)
         {
-            _calculatev = transform.forward * speed;
+            _calculatev = transform.forward * vel;
         }
         else if (Input.GetAxisRaw("Vertical") < 0)
         {
-            _calculatev = -transform.forward * speed;
+            _calculatev = -transform.forward * vel;
         }
         
         if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
@@ -60,6 +66,7 @@ public class playerTest : MonoBehaviour
 
         if (!_sideWalking) _calculatev.y = _rb.velocity.y;
         else _calculatev.y = 0;
+        if (transform.position.y < -10) _gc.Die();
 
         _rb.velocity = _calculatev;
     }
@@ -95,7 +102,14 @@ public class playerTest : MonoBehaviour
             _sideWalking = false;
         }
     }
-	void ManageCamera() {
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "laser")
+        {
+            _gc.Die();
+        }
+    }
+    void ManageCamera() {
 		
 
 		_rotationX += Input.GetAxis("Mouse X") * rotationspeed;

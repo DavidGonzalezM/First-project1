@@ -37,4 +37,9 @@ public class GameController : MonoBehaviour
         if (_time < _better || _better == 0) _better = _time;
         _time = 0;
     }
+    public void Die()
+    {
+        player.transform.position = _initialPos;
+        _time = 0;
+    }
 }
