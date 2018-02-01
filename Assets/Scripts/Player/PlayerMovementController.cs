@@ -39,26 +39,30 @@ public class PlayerMovementController : MonoBehaviour
 
 		_calculatev = new Vector3(0,0,0);
 
-		if (Input.GetAxisRaw("Horizontal") > 0)
+        float vel;
+        if (Input.GetKey(KeyCode.LeftShift)) vel = speed + 5;
+        else vel = speed;
+
+        if (Input.GetAxisRaw("Horizontal") > 0)
 		{
 			moving = true;
-			_calculatev += transform.right * speed;
+			_calculatev += transform.right * vel;
 		}
 		if (Input.GetAxisRaw("Horizontal") < 0)
 		{
 			moving = true;
-			_calculatev -= transform.right * speed;
+			_calculatev -= transform.right * vel;
 		}
 
 		if (Input.GetAxisRaw("Vertical") > 0)
 		{
 			moving = true;
-			_calculatev += transform.forward * speed;
+			_calculatev += transform.forward * vel;
 		}
 		if (Input.GetAxisRaw("Vertical") < 0)
 		{
 			moving = true;
-			_calculatev -= transform.forward * speed;
+			_calculatev -= transform.forward * vel;
 		}
 
 		if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)

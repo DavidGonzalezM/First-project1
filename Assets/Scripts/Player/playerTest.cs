@@ -66,7 +66,7 @@ public class playerTest : MonoBehaviour
 
         if (!_sideWalking) _calculatev.y = _rb.velocity.y;
         else _calculatev.y = 0;
-        if (transform.position.y < -20) _gc.Die();
+        if (transform.position.y < -20) _gc.Reset();
 
         _rb.velocity = _calculatev;
     }
@@ -106,7 +106,7 @@ public class playerTest : MonoBehaviour
     {
         if (other.gameObject.tag == "laser")
         {
-            _gc.Die();
+            _gc.Reset();
         }
     }
     void ManageCamera() {

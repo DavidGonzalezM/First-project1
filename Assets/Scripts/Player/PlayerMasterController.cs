@@ -30,8 +30,8 @@ public class PlayerMasterController : MonoBehaviour {
 
 	void Update ()
 	{
-		
-	}
+        if (transform.position.y < -20) state = PlayerStates.DEAD;
+    }
 
 	private void OnCollisionEnter(Collision collision)
 	{
@@ -56,10 +56,11 @@ public class PlayerMasterController : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider c) {
-		if (c.gameObject.tag == "Death") {
-			state = PlayerStates.DEAD;
-		}
-	}
+        if (c.gameObject.tag == "laser")
+        {
+            state = PlayerStates.DEAD;
+        }
+    }
 
 	public bool canJump() {
 		return onGround;

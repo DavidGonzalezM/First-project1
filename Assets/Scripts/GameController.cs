@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     private Vector3 _initialPos;
     private float _time;
     private float _better;
+    private PlayerMasterController _PMC;
 
 	void Start ()
     {
@@ -22,6 +23,7 @@ public class GameController : MonoBehaviour
         betterTime.text = "";
         _initialPos = player.transform.position;
         Cursor.visible = false;
+        _PMC = player.GetComponent<PlayerMasterController>();
     }
 	
 	void Update ()
@@ -29,6 +31,7 @@ public class GameController : MonoBehaviour
         _time += Time.deltaTime;
         currentTime.text = "Time: " + Mathf.RoundToInt(_time).ToString();
         betterTime.text = "Better Time: " + Mathf.RoundToInt(_better).ToString();
+        if (_PMC.state == PlayerMasterController.PlayerStates.DEAD && Input.GetKeyDown(KeyCode.Return)) Reset();
     }
 
     public void EndGame()
@@ -37,9 +40,10 @@ public class GameController : MonoBehaviour
         if (_time < _better || _better == 0) _better = _time;
         _time = 0;
     }
-    public void Die()
+    public void Reset()
     {
         player.transform.position = _initialPos;
         _time = 0;
+        _PMC.state = PlayerMasterController.PlayerStates.ON_AIR;
     }
 }
