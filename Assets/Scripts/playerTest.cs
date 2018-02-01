@@ -6,16 +6,23 @@ public class playerTest : MonoBehaviour
 {
 
     public float speed;
+    public float jumpForce;
+    private Rigidbody rb;
 
 	void Start ()
     {
-		
+        rb = GetComponent<Rigidbody>();
 	}
 	
 
 	void Update ()
     {
-		if (Input.GetAxisRaw("Horizontal") > 0)
+        ManageMovement();
+        ManageJump();
+    }
+    void ManageMovement()
+    {
+        if (Input.GetAxisRaw("Horizontal") > 0)
         {
             transform.Translate(transform.right * speed * Time.deltaTime);
         }
@@ -31,6 +38,13 @@ public class playerTest : MonoBehaviour
         {
             transform.Translate(-transform.forward * speed * Time.deltaTime);
         }
+    }
 
+    void ManageJump()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
 }
