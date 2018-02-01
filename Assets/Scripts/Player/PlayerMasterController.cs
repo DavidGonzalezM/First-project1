@@ -55,6 +55,12 @@ public class PlayerMasterController : MonoBehaviour {
 		}
 	}
 
+	private void OnTriggerEnter(Collider c) {
+		if (c.gameObject.tag == "Death") {
+			state = PlayerStates.DEAD;
+		}
+	}
+
 	public bool canJump() {
 		return onGround;
 	}
@@ -73,6 +79,6 @@ public class PlayerMasterController : MonoBehaviour {
 	}
 
 	public bool isMoving() {
-		return moving;
+		return moving && state != PlayerStates.DEAD;
 	}
 }
