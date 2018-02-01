@@ -14,8 +14,9 @@ public class GameController : MonoBehaviour
     private float _time;
     private float _better;
     private PlayerMasterController _PMC;
+    private PlayerAudioController _PAC;
 
-	void Start ()
+    void Start ()
     {
         _time = 0;
         _better = 0;
@@ -24,6 +25,7 @@ public class GameController : MonoBehaviour
         _initialPos = player.transform.position;
         Cursor.visible = false;
         _PMC = player.GetComponent<PlayerMasterController>();
+        _PAC = player.GetComponent<PlayerAudioController>();
     }
 	
 	void Update ()
@@ -45,5 +47,6 @@ public class GameController : MonoBehaviour
         player.transform.position = _initialPos;
         _time = 0;
         _PMC.state = PlayerMasterController.PlayerStates.ON_AIR;
+        _PAC.setAlive();
     }
 }

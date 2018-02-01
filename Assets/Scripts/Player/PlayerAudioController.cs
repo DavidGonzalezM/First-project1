@@ -64,5 +64,9 @@ public class PlayerAudioController : MonoBehaviour
 	{
 		sc.Play ((int) PlayerSounds.LAND);
 	}
+    public void setAlive()
+    {
+        alive = true;
+    }
 }
 
