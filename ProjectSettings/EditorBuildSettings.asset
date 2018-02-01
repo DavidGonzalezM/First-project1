@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/mapa1.unity
     guid: 958e947317ed0cc43b066ed98bbba99c
+  - enabled: 1
+    path: Assets/Scenes/h2play.unity
+    guid: 1b640eb493b7daa49bb56a22b814ffb7
