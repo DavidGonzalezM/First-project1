@@ -66,7 +66,7 @@ public class playerTest : MonoBehaviour
 
         if (!_sideWalking) _calculatev.y = _rb.velocity.y;
         else _calculatev.y = 0;
-        if (transform.position.y < -10) _gc.Die();
+        if (transform.position.y < -20) _gc.Die();
 
         _rb.velocity = _calculatev;
     }
