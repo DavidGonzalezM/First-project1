@@ -13,6 +13,10 @@ public class saltMolla : MonoBehaviour {
 	void Update () {
 		
 	}
+	/// <summary>
+	/// Raises the collision enter event.
+	/// </summary>
+	/// <param name="col">Col.</param>
 	void OnCollisionEnter (Collision col) {
 		if (col.collider.tag == "molla")
 			_rb.AddForce (0, 200, 0); 
