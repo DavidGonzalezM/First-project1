@@ -1217,7 +1217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pitchVar: 0.2
-  audioSources: []
+  audioSources:
+  - {fileID: 1711926454712008}
 --- !u!122 &122360326882841154
 Halo:
   m_ObjectHideFlags: 1

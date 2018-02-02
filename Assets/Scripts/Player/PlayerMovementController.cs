@@ -6,7 +6,7 @@ public class PlayerMovementController : MonoBehaviour
 	private float speed;
 	private float jumpForce;
 
-    private Animator anim;
+    //private Animator anim;
 	private Vector3 _calculatev;
 	private Rigidbody _rb;
 	private bool _sideWalking;
@@ -19,7 +19,7 @@ public class PlayerMovementController : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
 		player = GetComponent<PlayerMasterController> ();
 		speed = player.speed;
 		jumpForce = player.jumpForce;
@@ -34,15 +34,15 @@ public class PlayerMovementController : MonoBehaviour
 			ManageMovement ();
 			ManageJump ();
 		}
-        else
-            anim.SetBool("death", true);
+        //else
+            //anim.SetBool("death", true);
     }
 
 	void ManageMovement()
 	{
 		bool moving = false;
 
-		_sideWalking = player.sideWalking();
+		_sideWalking = player.state == PlayerMasterController.PlayerStates.ON_WALL;
 
 		_calculatev = new Vector3(0,0,0);
 
@@ -50,14 +50,16 @@ public class PlayerMovementController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             vel = speed + 5;
-            anim.SetBool("sprint", true);
-            anim.speed = velocidad_correr;
+            //anim.SetBool("sprint", true);
+            //anim.speed = velocidad_correr;
+			player.run(true);
         }
         else
         {
             vel = speed;
-            anim.SetBool("sprint", false);
-            anim.speed = 1.0F;
+            //anim.SetBool("sprint", false);
+            //anim.speed = 1.0F;
+			player.run(false);
         }
 
         if (Input.GetAxisRaw("Horizontal") > 0)
@@ -103,12 +105,12 @@ public class PlayerMovementController : MonoBehaviour
 
 		if (Input.GetButtonDown("Jump"))
 		{
-			if (player.canJump())
+			if (player.onSurface())
 			{
 				_rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 				player.jumped();
-                anim.SetBool("Jump", true);
-                anim.speed = velocidad_saltar;
+                //anim.SetBool("Jump", true);
+                //anim.speed = velocidad_saltar;
             }
         }
     }

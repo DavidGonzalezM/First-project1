@@ -8,90 +8,68 @@ public class PlayerMasterController : MonoBehaviour {
 	public float jumpForce;
 	public float rotationspeed;
 
-	private bool onGround;
-	private bool onWall;
-	private bool moving;
-    private Animator anim;
+	private PlayerAnimController anim;
+
+	private bool moving, running;
 
 	public enum PlayerStates
 	{
-		ON_SURFACE = 0,
-		ON_AIR = 1,
-		DEAD = 3
+		ON_GROUND = 0,
+		ON_WALL = 1,
+		JUMPING = 2,
+		ON_AIR = 3,
+		DEAD = 4
 	}
 
 	public PlayerStates state;
 
 	void Start ()
 	{
-        anim = GetComponent<Animator>();
-		onGround = true;
-		onWall = false;
+		anim = GetComponent<PlayerAnimController> ();
+
 		moving = false;
+		running = false;
 	}
 
 	void Update ()
 	{
-        if (transform.position.y < -20) state = PlayerStates.DEAD;
+        if (transform.position.y < -40) state = PlayerStates.DEAD;
     }
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		state = PlayerStates.ON_SURFACE;
-
-        anim.SetBool("air", false);
-
-		if (collision.gameObject.tag == "ParedV")
-		{
-			onWall = true;
-            anim.SetBool("wall", true);
-            anim.speed = 1.0F;
-        }
 		if (collision.contacts[0].normal == Vector3.up)
 		{
-			onGround = true;
+			state = PlayerStates.ON_GROUND;
 		}
+		else if (collision.gameObject.tag == "ParedV")
+		{
+			state = PlayerStates.ON_WALL;
+        }
+
 	}
 
 	private void OnCollisionExit(Collision collision)
 	{
-        if (collision.gameObject.tag == "ParedV")
-        {
-            onWall = false;
-            anim.SetBool("wall", false);
-            anim.speed = 1.0F;
-        }
-        else
-        {
-            anim.SetBool("air", true);
-            state = PlayerStates.ON_AIR;
-            anim.SetBool("Jump", false);
-            anim.speed = 1.0F;
-        }
+		if (state != PlayerStates.JUMPING) {
+			state = PlayerStates.ON_AIR;
+		}
     }
 
 	private void OnTriggerEnter(Collider c) {
         if (c.gameObject.tag == "laser")
         {
             state = PlayerStates.DEAD;
-            anim.SetBool("death", true);
         }
     }
 
-	public bool canJump() {
-		return onGround;
-	}
-
-	public bool sideWalking() {
-		return onWall;
+	public bool onSurface() {
+		return state == PlayerStates.ON_GROUND || state == PlayerStates.ON_WALL;
 	}
 
 	public void jumped() {
-        anim.SetBool("air", true);
-        anim.SetBool("Jump", false);
-        anim.speed = 1.0F;
-        state = PlayerStates.ON_AIR;
-		onGround = false;
+		//anim.jump ();
+		state = PlayerStates.JUMPING;
 	}
 
 	public void move(bool m) {
@@ -100,5 +78,13 @@ public class PlayerMasterController : MonoBehaviour {
 
 	public bool isMoving() {
 		return moving && state != PlayerStates.DEAD;
+	}
+
+	public void run(bool r) {
+		running = r;
+	}
+
+	public bool isRunning() {
+		return running;
 	}
 }

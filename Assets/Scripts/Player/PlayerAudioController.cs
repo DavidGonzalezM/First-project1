@@ -43,7 +43,7 @@ public class PlayerAudioController : MonoBehaviour
 			if (moving && !wasMoving)
 				stepCount = stepSilence;
 
-			if (player.state == PlayerMasterController.PlayerStates.ON_SURFACE && moving) {
+			if (player.onSurface() && moving) {
 				if (stepCount >= stepSilence) {
 					sc.Play ((int)PlayerSounds.WALK_STEP);
 					stepCount = 0f;

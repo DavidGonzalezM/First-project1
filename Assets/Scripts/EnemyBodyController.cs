@@ -28,7 +28,7 @@ public class EnemyBodyController : MonoBehaviour
 	void Update ()
 	{
 		if (_anim.GetBool("isShooting")) _anim.SetBool("isShooting", false);
-		transform.LookAt(_target);
+		transform.LookAt(_target.position + new Vector3 (0, 2, 0));
 		transform.Rotate(-90,-90,0);
 		RaycastHit hit;
 		Physics.Raycast(transform.position, _target.position - transform.position, out hit);
