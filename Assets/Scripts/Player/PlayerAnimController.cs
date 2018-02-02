@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerAnimController : MonoBehaviour
 {
@@ -48,14 +49,12 @@ public class PlayerAnimController : MonoBehaviour
 				reset ();
 				death = true;
 				dead = true;
-			} else {
-				death = false;
+				StartCoroutine (WaitForExit (4));
 			}
 		}
 
 		if (player.state != PlayerMasterController.PlayerStates.DEAD && dead) {
 			death = false;
-			anim.Play ("Andar");
 		}
 
 		setBools (wall, Jump, sprint, air, death);
@@ -93,10 +92,9 @@ public class PlayerAnimController : MonoBehaviour
 		//*/
 	}
 
-	public void jumpAnim() {
-		anim.SetBool("air", true);
-		anim.SetBool("Jump", true);
-		anim.speed = 1.0F;
+	IEnumerator WaitForExit(float t) {
+		yield return new WaitForSeconds(t);
+		SceneManager.LoadScene (0);
 	}
 
 	public void reset() {
@@ -105,6 +103,7 @@ public class PlayerAnimController : MonoBehaviour
 		sprint = false;
 		air = false;
 		death = false;
+		setBools (wall, Jump, sprint, air, death);
 	}
 
 	void setBools (bool wall, bool Jump, bool sprint, bool air, bool death) {
