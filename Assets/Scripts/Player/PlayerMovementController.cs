@@ -6,15 +6,20 @@ public class PlayerMovementController : MonoBehaviour
 	private float speed;
 	private float jumpForce;
 
+    private Animator anim;
 	private Vector3 _calculatev;
 	private Rigidbody _rb;
 	private bool _sideWalking;
 
 	private PlayerMasterController player;
 
-	// Use this for initialization
-	void Start ()
+    public float velocidad_correr = 1.0F;
+    public float velocidad_saltar = 1.0F;
+
+    // Use this for initialization
+    void Start ()
 	{
+        anim = GetComponent<Animator>();
 		player = GetComponent<PlayerMasterController> ();
 		speed = player.speed;
 		jumpForce = player.jumpForce;
@@ -29,7 +34,9 @@ public class PlayerMovementController : MonoBehaviour
 			ManageMovement ();
 			ManageJump ();
 		}
-	}
+        else
+            anim.SetBool("death", true);
+    }
 
 	void ManageMovement()
 	{
@@ -40,8 +47,18 @@ public class PlayerMovementController : MonoBehaviour
 		_calculatev = new Vector3(0,0,0);
 
         float vel;
-        if (Input.GetKey(KeyCode.LeftShift)) vel = speed + 5;
-        else vel = speed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            vel = speed + 5;
+            anim.SetBool("sprint", true);
+            anim.speed = velocidad_correr;
+        }
+        else
+        {
+            vel = speed;
+            anim.SetBool("sprint", false);
+            anim.speed = 1.0F;
+        }
 
         if (Input.GetAxisRaw("Horizontal") > 0)
 		{
@@ -90,8 +107,10 @@ public class PlayerMovementController : MonoBehaviour
 			{
 				_rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 				player.jumped();
-			}
-		}
-	}
+                anim.SetBool("Jump", true);
+                anim.speed = velocidad_saltar;
+            }
+        }
+    }
 }
 

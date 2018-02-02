@@ -11,6 +11,7 @@ public class PlayerMasterController : MonoBehaviour {
 	private bool onGround;
 	private bool onWall;
 	private bool moving;
+    private Animator anim;
 
 	public enum PlayerStates
 	{
@@ -23,6 +24,7 @@ public class PlayerMasterController : MonoBehaviour {
 
 	void Start ()
 	{
+        anim = GetComponent<Animator>();
 		onGround = true;
 		onWall = false;
 		moving = false;
@@ -37,10 +39,14 @@ public class PlayerMasterController : MonoBehaviour {
 	{
 		state = PlayerStates.ON_SURFACE;
 
+        anim.SetBool("air", false);
+
 		if (collision.gameObject.tag == "ParedV")
 		{
 			onWall = true;
-		}
+            anim.SetBool("wall", true);
+            anim.speed = 1.0F;
+        }
 		if (collision.contacts[0].normal == Vector3.up)
 		{
 			onGround = true;
@@ -49,16 +55,26 @@ public class PlayerMasterController : MonoBehaviour {
 
 	private void OnCollisionExit(Collision collision)
 	{
-		if (collision.gameObject.tag == "ParedV")
-		{
-			onWall = false;
-		}
-	}
+        if (collision.gameObject.tag == "ParedV")
+        {
+            onWall = false;
+            anim.SetBool("wall", false);
+            anim.speed = 1.0F;
+        }
+        else
+        {
+            anim.SetBool("air", true);
+            state = PlayerStates.ON_AIR;
+            anim.SetBool("Jump", false);
+            anim.speed = 1.0F;
+        }
+    }
 
 	private void OnTriggerEnter(Collider c) {
         if (c.gameObject.tag == "laser")
         {
             state = PlayerStates.DEAD;
+            anim.SetBool("death", true);
         }
     }
 
@@ -71,7 +87,10 @@ public class PlayerMasterController : MonoBehaviour {
 	}
 
 	public void jumped() {
-		state = PlayerStates.ON_AIR;
+        anim.SetBool("air", true);
+        anim.SetBool("Jump", false);
+        anim.speed = 1.0F;
+        state = PlayerStates.ON_AIR;
 		onGround = false;
 	}
 
