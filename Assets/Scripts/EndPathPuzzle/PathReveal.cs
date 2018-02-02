@@ -22,13 +22,14 @@ public class PathReveal : MonoBehaviour
 			gameObject.SetActive (true);
 	}
 
-	public bool checkReveal() {
+	public void checkReveal() {
 		foreach (GameObject button in buttons) {
-			if (!button.GetComponent<ButtonActivation> ().isActivated ())
-				return false;
+            if (!button.GetComponent<ButtonActivation>().isActivated())
+                return;
 		}
+        reveal = true;
+        gameObject.SetActive(true);
 
-		return true;
-	}
+    }
 }
 

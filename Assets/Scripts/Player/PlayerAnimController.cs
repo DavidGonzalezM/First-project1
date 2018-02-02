@@ -29,7 +29,7 @@ public class PlayerAnimController : MonoBehaviour
 	{
 		//*
 		if (player.state == PlayerMasterController.PlayerStates.ON_GROUND) {
-			sprint = player.isRunning ();
+			sprint = player.isRunning () && player.isMoving();
 			wall = false;
 			Jump = false;
 			air = false;

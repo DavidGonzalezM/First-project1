@@ -22,6 +22,7 @@ public class ButtonActivation : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.E)) {
 				activated = true;
 				pathToReveal.GetComponent<PathReveal> ().checkReveal ();
+                gameObject.SetActive(false);
 			}
 		}
 	}
@@ -30,7 +31,7 @@ public class ButtonActivation : MonoBehaviour {
 		Vector3 dir = (transform.position - playerModel.transform.position).normalized;
 		float dotProd = Vector3.Dot (dir, playerModel.transform.forward);
 
-		return dotProd > 0.6;
+		return dotProd > 0;
 	}
 
 	public bool isActivated() {
